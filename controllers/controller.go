@@ -15,6 +15,14 @@ func ExibeTodosVeiculos(c *gin.Context) {
 	c.JSON(200, veiculos)
 }
 
+//exibe veículo pelo ID
+func ExibeVeiculoId(c *gin.Context) {
+	var veiculo models.Veiculo
+	id := c.Params.ByName("id")
+	database.DB.Find(&veiculo, id)
+	c.JSON(200, veiculo)
+}
+
 //cria um novo veículo
 func CriaVeiculo(c *gin.Context) {
 	var veiculo models.Veiculo

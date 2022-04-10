@@ -6,8 +6,9 @@ import (
 )
 
 func HandleRequests() {
-	r := gin.Default() //facilita a descrição das rotas abaixo
+	r := gin.Default() //iniciando variavel de rotas Gin
 	r.GET("/estoque", controllers.ExibeTodosVeiculos)
+	r.GET("/estoque/:id", controllers.ExibeVeiculoId)
 	r.POST("/estoque/criar", controllers.CriaVeiculo)
 	r.PATCH("/estoque/alterar/:id", controllers.EditaDadosVeiculo)
 	r.DELETE("/estoque/deletar/:id", controllers.DeletaVeiculo)
