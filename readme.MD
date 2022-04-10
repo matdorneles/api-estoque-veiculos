@@ -11,8 +11,5 @@ Bibliotecas:
 - Gin
 - Gorm
 
-** Work In Progress **
-* Atualizações futuras:
-- Adicionar chassi do veículo;
-- Adicionar placa do veículo;
-- Alterar status do veículo (novo, reservado, vendido, etc);
+Versão 1.0.0
+- Nesta versão você pode criar, encontrar(listar todos, buscar por ID, Marca, Modelo ou Cor), editar(por ID) ou excluir(por ID) seus veículo.
