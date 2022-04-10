@@ -19,30 +19,57 @@ func ExibeTodosVeiculos(c *gin.Context) {
 func ExibeVeiculoId(c *gin.Context) {
 	var veiculo models.Veiculo
 	id := c.Params.ByName("id")
-	database.DB.Find(&veiculo, id)
-	c.JSON(200, veiculo)
+	database.DB.First(&veiculo, id)
+
+	if veiculo.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Não Encontrado": "Veículo não encontrado"})
+		return
+	}
+	c.JSON(http.StatusOK, veiculo)
 }
 
-//exibe veículo pelo ID
-func ExibeVeiculoNome(c *gin.Context) {
+//exibe veículo pela Marca
+func ExibeVeiculoMarca(c *gin.Context) {
 	var veiculo models.Veiculo
-	nome := c.Params.ByName("nome")
-	database.DB.Find(&veiculo, nome)
-	c.JSON(200, veiculo)
+	marca := c.Param("marca")
+	database.DB.Where(&models.Veiculo{Marca: marca}).Find(&veiculo)
+
+	if veiculo.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Não Encontrado": "Veículo não encontrado"})
+		return
+	}
+
+	c.JSON(http.StatusOK, veiculo)
 }
 
 func ExibeVeiculoModelo(c *gin.Context) {
 	var veiculo models.Veiculo
-	modelo := c.Params.ByName("modelo")
-	database.DB.Find(&veiculo, modelo)
-	c.JSON(200, veiculo)
+	modelo := c.Param("modelo")
+	database.DB.Where(&models.Veiculo{Modelo: modelo}).Find(&veiculo)
+
+	if veiculo.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Não Encontrado": "Veículo não encontrado"})
+		return
+	}
+
+	c.JSON(http.StatusOK, veiculo)
 }
 
 func ExibeVeiculoCor(c *gin.Context) {
 	var veiculo models.Veiculo
-	cor := c.Params.ByName("cor")
-	database.DB.Find(&veiculo, cor)
-	c.JSON(200, veiculo)
+	cor := c.Param("cor")
+	database.DB.Where(&models.Veiculo{Cor: cor}).Find(&veiculo)
+
+	if veiculo.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Não Encontrado": "Veículo não encontrado"})
+		return
+	}
+
+	c.JSON(http.StatusOK, veiculo)
 }
 
 //cria um novo veículo
