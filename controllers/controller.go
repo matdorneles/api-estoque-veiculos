@@ -61,6 +61,10 @@ func CriaVeiculo(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
 		return
+	} else if len(veiculo.Chassi) != 17 { //se a quantidade de caracteres em chassi for diferente que 17, não é possível criar o veículo
+		c.JSON(http.StatusBadGateway, gin.H{
+			"Erro": "O Chassi deve conter 17 caracteres"})
+		return
 	}
 	database.DB.Create(&veiculo)
 	c.JSON(http.StatusOK, veiculo)
